@@ -8,7 +8,6 @@ h.body_width = 0
 input_file = open('json_original.json').read()
 output_file = open('output.txt', 'w')
 object_file = open('output.json', 'w')
-final_file = open('final.txt', 'w')
 
 data = json.loads(input_file)
 i = 0
@@ -20,6 +19,8 @@ for post in data['data']['posts']:
     post['markdown'] = re.sub('\[video-.*]', ' ', post['markdown'])
     post['markdown'] = re.sub('\[recommended-posts .*]', ' ', post['markdown'])
     post['markdown'] = re.sub('\[widget-.*]', ' ', post['markdown'])
+    post['markdown'] = re.sub('\[hotspot .*]', ' ', post['markdown'])
+    post['image'] = re.sub('https://pg-lib', 'https://policygenius-blog', str(post['image']))
 
 
     output_file.write(post['markdown'])
